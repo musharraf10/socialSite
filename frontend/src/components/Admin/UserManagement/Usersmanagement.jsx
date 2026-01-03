@@ -52,13 +52,13 @@ const UserManagementTable = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/v1/users/getallusers');
+      const response = await axios.get('https://socialsite-xcdq.onrender.com/api/v1/users/getallusers');
       if (response.data && response.data.users) {
         setUsers(response.data.users);
       }
     } catch (error) {
-      console.error('Error fetching users:', error);+
-      showSnackbar('Failed to fetch users.');
+      console.error('Error fetching users:', error); +
+        showSnackbar('Failed to fetch users.');
     }
   };
 
@@ -78,7 +78,7 @@ const UserManagementTable = () => {
 
   const handleSaveEdit = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/v1/users/update-user/${editUser._id}`, editUser);
+      await axios.put(`https://socialsite-xcdq.onrender.com/api/v1/users/update-user/${editUser._id}`, editUser);
       setUsers(users.map((user) => (user._id === editUser._id ? editUser : user)));
       setOpenEdit(false);
       showSnackbar('User updated successfully.');
@@ -95,7 +95,7 @@ const UserManagementTable = () => {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/users/delete-user/${confirmDelete.userId}`);
+      await axios.delete(`https://socialsite-xcdq.onrender.com/api/v1/users/delete-user/${confirmDelete.userId}`);
       setUsers(users.filter((user) => user._id !== confirmDelete.userId));
       setConfirmDelete({ open: false, userId: null });
       showSnackbar('User deleted successfully.');
@@ -193,7 +193,7 @@ const UserManagementTable = () => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-          <b>  USER MANAGEMENT</b>
+            <b>  USER MANAGEMENT</b>
           </Typography>
         </Box>
 

@@ -24,8 +24,8 @@ const CheckoutForm = () => {
     const fetchPlanDetails = async () => {
       try {
         console.log("plan", planId)
-        const { data } = await axios.get(`${BackendServername}/plans/${planId}`,{
-          withCredentials:true
+        const { data } = await axios.get(`${BackendServername}/plans/${planId}`, {
+          withCredentials: true
         });
         setPlanData(data);
       } catch (error) {
@@ -42,8 +42,8 @@ const CheckoutForm = () => {
   useEffect(() => {
     const createPaymentIntent = async () => {
       try {
-        const { data } = await axios.post(`${BackendServername}/stripe/create-payment`, { planId },{
-          withCredentials:true
+        const { data } = await axios.post(`${BackendServername}/stripe/create-payment`, { planId }, {
+          withCredentials: true
         });
         setClientSecret(data.clientSecret);
       } catch (error) {
@@ -71,7 +71,7 @@ const CheckoutForm = () => {
         elements,
         clientSecret,
         confirmParams: {
-          return_url: "http://localhost:5173/success",
+          return_url: "https://skillupbuildup.netlify.app/success",
         },
       });
       if (error) setErrorMessage(error.message);

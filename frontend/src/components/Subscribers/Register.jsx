@@ -69,7 +69,7 @@ const Register = () => {
     <div className="register-container">
       <div className="register-wrapper">
 
-        
+
         <h1>Registration Form</h1>
         <br />
         <form onSubmit={formik.handleSubmit}>
@@ -155,8 +155,8 @@ const Register = () => {
                   passwordStrength === "Weak"
                     ? "red"
                     : passwordStrength === "Medium"
-                    ? "yellow"
-                    : "green",
+                      ? "yellow"
+                      : "green",
                 fontWeight: "bold",
               }}
             >
@@ -169,35 +169,35 @@ const Register = () => {
           </button>
 
           <a
-            href="http://localhost:5000/api/v1/users/auth/google"
+            href="https://socialsite-xcdq.onrender.com/api/v1/users/auth/google"
             className="google-signin-btn"
           >
             <span>Sign in with Google</span>
           </a>
 
           <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              navigate("/")
-            }}
-            style={{
-              color: "#4a90e2",
-              textDecoration: "none",
-              fontSize: "14px",
-              fontWeight: "500",
-              transition: "all 0.2s ease",
-  
-            }}
-            onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
-            onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-          >
-            Back to Dashboard
-          </a>
-        </div>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate("/")
+              }}
+              style={{
+                color: "#4a90e2",
+                textDecoration: "none",
+                fontSize: "14px",
+                fontWeight: "500",
+                transition: "all 0.2s ease",
 
-          
+              }}
+              onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+              onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+            >
+              Back to Dashboard
+            </a>
+          </div>
+
+
         </form>
       </div>
     </div>

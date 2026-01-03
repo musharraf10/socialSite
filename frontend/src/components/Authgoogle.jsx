@@ -19,7 +19,7 @@ const Oauth = () => {
       };
 
       const resp = await axios.post(
-        'http://localhost:5000/api/v1/users/google',
+        'https://socialsite-xcdq.onrender.com/api/v1/users/google',
         form,
         {
           withCredentials: true,

@@ -18,7 +18,7 @@ const sendStepByStepNotification = async (to, postId, title) => {
       html: `
         <h2>${title}</h2>
         <p>A new step-by-step guide is available. Click below to follow the steps:</p>
-        <p><a href="http://localhost:5173/posts/guide/${postId}" target="_blank">View Guide</a></p>
+        <p><a href="https://skillupbuildup.netlify.app/posts/guide/${postId}" target="_blank">View Guide</a></p>
       `,
     };
 
@@ -26,7 +26,10 @@ const sendStepByStepNotification = async (to, postId, title) => {
     console.log("Step-by-Step Guide Notification Email sent", info.messageId);
     return info;
   } catch (error) {
-    console.error("Error sending step-by-step guide notification email:", error);
+    console.error(
+      "Error sending step-by-step guide notification email:",
+      error
+    );
     throw new Error("Email sending failed");
   }
 };

@@ -15,8 +15,8 @@ passport.use(
     },
     async (username, password, done) => {
       try {
-        const user = await User.findOne({ 
-          $or: [{ username }, { email: username }] 
+        const user = await User.findOne({
+          $or: [{ username }, { email: username }],
         });
         // console.log("Pass",user)
         if (!user) {
@@ -71,7 +71,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/api/v1/users/auth/google/callback",
+      callbackURL:
+        "https://socialsite-xcdq.onrender.com/api/v1/users/auth/google/callback",
     },
     async (accessToken, refreshtoken, profile, done) => {
       try {

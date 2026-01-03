@@ -1,12 +1,10 @@
 import axios from "axios";
 //create that must return a promise
-const BASE_URL = "http://localhost:5000/api/v1/plans";
+const BASE_URL = "https://socialsite-xcdq.onrender.com/api/v1/plans";
 
-//!Create post api     
-
+//!Create post api
 
 // commented out because this api used  in addplanpopup
-
 
 // export const createPlanAPI = async (planData) => {
 //   const response = await axios.post(`${BASE_URL}/create`, planData, {
@@ -14,9 +12,6 @@ const BASE_URL = "http://localhost:5000/api/v1/plans";
 //   });
 //   return response.data;
 // };
-
-
-
 
 //! Fetch all plans
 export const fetchPlansAPI = async () => {

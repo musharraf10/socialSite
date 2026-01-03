@@ -8,7 +8,6 @@ const sendAccVerificationEmail = require("../../utils/sendAccVerificationEmail")
 const sendPasswordEmail = require("../../utils/sendPasswordEmail");
 const { console } = require("inspector");
 
-
 //-----User Controller---
 
 const CreateToken = (user = null) => {
@@ -52,12 +51,15 @@ const userController = {
   login: asyncHandler(async (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
       if (err) return next(err);
-      
+
       if (!user) {
         return res.status(401).json({ message: "User Not Found" });
       }
       //generate token
-      const token = jwt.sign({ id: user?._id, role: user?.role }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: user?._id, role: user?.role },
+        process.env.JWT_SECRET
+      );
       //set the token into cookie
       res.cookie("token", token, {
         httpOnly: true,
@@ -73,7 +75,7 @@ const userController = {
         username: user?.username,
         email: user?.email,
         _id: user?._id,
-        role: user?.role
+        role: user?.role,
       });
     })(req, res, next);
   }),
@@ -90,28 +92,34 @@ const userController = {
       (err, user, info) => {
         if (err) return next(err);
         if (!user) {
-          return res.redirect("http://localhost:5173/google-login-error");
+          return res.redirect(
+            "https://skillupbuildup.netlify.app//google-login-error"
+          );
         }
         //generate the token
 
-        const token = jwt.sign({ id: user?._id, role: user?.role }, process.env.JWT_SECRET, {
-          expiresIn: "1d",
-        });
+        const token = jwt.sign(
+          { id: user?._id, role: user?.role },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "1d",
+          }
+        );
         //set the token into the cooke
         res.cookie("token", token, {
           httpOnly: true,
           secure: false,
           sameSite: "strict",
-          maxAge: 24 * 60 * 60 * 1000, 
+          maxAge: 24 * 60 * 60 * 1000,
         });
         //redirect the user dashboard
-        res.redirect("http://localhost:5173/");
+        res.redirect("https://skillupbuildup.netlify.app/");
       }
     )(req, res, next);
   }),
   // ! check user authentication status
   checkAuthenticated: asyncHandler(async (req, res) => {
-    console.log(req.cookies)
+    console.log(req.cookies);
     const token = req.cookies["token"];
     if (!token) {
       return res.status(401).json({ isAuthenticated: false });
@@ -128,10 +136,10 @@ const userController = {
           _id: user?._id,
           username: user?.username,
           profilePicture: user?.profilePicture,
-          role: user?.role
+          role: user?.role,
         });
       }
-    } catch (error) { }
+    } catch (error) {}
     return res.status(401).json({ isAuthenticated: false, error });
   }),
   // ! Logout
@@ -247,7 +255,7 @@ const userController = {
   verifyEmailAcc: asyncHandler(async (req, res) => {
     //Get the token
     const { verifyToken } = req.params;
-    console.log(verifyToken)
+    console.log(verifyToken);
     //Convert the token to actual token that has been saved in our db
     const cryptoToken = crypto
       .createHash("sha256")
@@ -329,18 +337,17 @@ const userController = {
   updateEmail: asyncHandler(async (req, res) => {
     //email
     const { email } = req.body;
-    console.log(email)
-    const checkEmail = await User.findOne({email})
-    if(checkEmail){
-      return res.status(302).json({message : "Email Already Exists"})
+    console.log(email);
+    const checkEmail = await User.findOne({ email });
+    if (checkEmail) {
+      return res.status(302).json({ message: "Email Already Exists" });
     }
     const user = await User.findById(req.user);
 
-    if(user.email == email){
-      return res.status(400).json({message : "Enter New Email"})
+    if (user.email == email) {
+      return res.status(400).json({ message: "Enter New Email" });
     }
 
-   
     user.email = email;
     user.isEmailVerified = false;
 
@@ -356,7 +363,7 @@ const userController = {
   }),
 
   updateProfilePic: asyncHandler(async (req, res) => {
-    console.log(req.file)
+    console.log(req.file);
     await User.findByIdAndUpdate(
       req.user,
       {
@@ -371,7 +378,7 @@ const userController = {
   }),
   deleteUser: asyncHandler(async (req, res) => {
     const userId = req.params;
-    await User.findByIdAndDelete(userId)
+    await User.findByIdAndDelete(userId);
     res.json({ message: "User Deleted Successfully" });
   }),
 
@@ -379,21 +386,29 @@ const userController = {
   updateUserStatus: asyncHandler(async (req, res) => {
     const { isActive } = req.body;
     if (typeof isActive !== "boolean") {
-      return res.status(400).json({ message: "isActive field must be a boolean" });
+      return res
+        .status(400)
+        .json({ message: "isActive field must be a boolean" });
     }
 
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, { isActive }, { new: true, runValidators: true });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { isActive },
+      { new: true, runValidators: true }
+    );
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json({ message: "User status updated successfully", user: updatedUser });
+    res
+      .status(200)
+      .json({ message: "User status updated successfully", user: updatedUser });
   }),
 
   // !getallTheusers
 
   deleteUser: asyncHandler(async (req, res) => {
     const { userId } = req.params;
-    await User.findByIdAndDelete(userId)
+    await User.findByIdAndDelete(userId);
     res.json({ message: "User Deleted Successfully" });
   }),
   // !getallTheusers
@@ -401,11 +416,12 @@ const userController = {
     const getallusers = await User.find({});
 
     if (!getallusers || getallusers.length === 0) {
-      return res.status(404).json({ message: "No users found", success: false });
+      return res
+        .status(404)
+        .json({ message: "No users found", success: false });
     }
 
     res.status(200).json({ success: true, users: getallusers });
-
   }),
   // updateuser
   updateUser: asyncHandler(async (req, res) => {
@@ -414,7 +430,9 @@ const userController = {
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -427,12 +445,10 @@ const userController = {
 
     res.status(200).json({
       success: true,
-      message: 'User updated successfully',
+      message: "User updated successfully",
       user: updatedUser,
     });
   }),
-
-
 
   changePassword: asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body;
@@ -456,24 +472,24 @@ const userController = {
     try {
       const userId = req.user; // Ensure `req.user` is populated correctly
       console.log("User ID:", userId);
-  
+
       if (!userId) {
         return res.status(400).json({ message: "User ID is required" });
       }
-  
+
       const userPlanDetails = await User.findById(userId);
-  
+
       if (!userPlanDetails) {
         return res.status(404).json({ message: "No plan found for this user" });
       }
-  
+
       res.status(200).json({ data: userPlanDetails.hasSelectedPlan });
     } catch (error) {
       console.error("Error fetching user plan:", error);
       res.status(500).json({ message: "Server error" });
     }
   }),
-  
+
   BecomeCreator: asyncHandler(async (req, res) => {
     const { phone, channelName, GovtIdType } = req.body;
     const govID = req.file ? req.file.path : null;
@@ -489,7 +505,10 @@ const userController = {
 
   googleauth: async (req, res) => {
     const { email, username } = req.body;
-    if (!email) return res.status(400).json({ error: "Email is required", success: false });
+    if (!email)
+      return res
+        .status(400)
+        .json({ error: "Email is required", success: false });
 
     try {
       let user = await User.findOne({ email });
@@ -500,14 +519,16 @@ const userController = {
           message: "Login successful",
           success: true,
           user,
-          token
+          token,
         });
       } else {
-        const generatePassword = () => Math.random().toString(36).slice(-8); 
+        const generatePassword = () => Math.random().toString(36).slice(-8);
         const hashedPassword = await bcrypt.hash(generatePassword(), 10);
 
         const newUser = new User({
-          username: username.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 100000).toString(),
+          username:
+            username.split(" ").join("").toLowerCase() +
+            Math.floor(Math.random() * 100000).toString(),
           email,
           password: hashedPassword,
         });
@@ -536,17 +557,15 @@ const userController = {
     }
   },
 
-  PaidSub : asyncHandler(async(req,res) =>{
-    const countPaid = await User.countDocuments({hasSelectedPlan : true})
-    res.status(200).json({count: countPaid})
+  PaidSub: asyncHandler(async (req, res) => {
+    const countPaid = await User.countDocuments({ hasSelectedPlan: true });
+    res.status(200).json({ count: countPaid });
   }),
-  UnPaidSub : asyncHandler(async(req,res) =>{
-    const countUnPaid = await User.countDocuments({hasSelectedPlan : false})
-    res.status(200).json({count: countUnPaid})
-  })
-
+  UnPaidSub: asyncHandler(async (req, res) => {
+    const countUnPaid = await User.countDocuments({ hasSelectedPlan: false });
+    res.status(200).json({ count: countUnPaid });
+  }),
 };
-
 
 module.exports = userController;
 

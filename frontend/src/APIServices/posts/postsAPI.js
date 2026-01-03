@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-const BASE_URL = "http://localhost:5000/api/v1/posts";
+const BASE_URL = "https://socialsite-xcdq.onrender.com/api/v1/posts";
 const BackendServername = import.meta.env.VITE_BACKENDSERVERNAME;
 
 //!Create post api
@@ -11,7 +11,6 @@ export const createPostAPI = async (postData) => {
   });
   return response.data;
 };
-
 
 export const updatePostAPI = async ({ formData, postId }) => {
   const response = await axios.patch(
@@ -54,7 +53,7 @@ export const fetchPost = async (postId) => {
 
 //!like post api
 export const likePostAPI = async (postId) => {
-  console.log("Like",postId)
+  console.log("Like", postId);
   const response = await axios.patch(
     `${BASE_URL}/likes/${postId}`,
     {},
@@ -66,7 +65,7 @@ export const likePostAPI = async (postId) => {
 };
 //!dislike post api
 export const dislikePostAPI = async (postId) => {
-  console.log("disLike",postId)
+  console.log("disLike", postId);
   const response = await axios.patch(
     `${BASE_URL}/dislikes/${postId}`,
     {},
@@ -76,7 +75,6 @@ export const dislikePostAPI = async (postId) => {
   );
   return response.data;
 };
-
 
 export const fetchPendingPosts = async () => {
   const response = await axios.get(`${BASE_URL}/pendingposts`);
@@ -121,26 +119,27 @@ export const useDeletePost = () => {
   });
 };
 
-
 export const fetchPostAnalytics = async () => {
   const response = await axios.get(`${BASE_URL}/analytics`);
   return response.data;
-}
-
+};
 
 export const bookmarkPostAPI = async (postId) => {
   console.log("Post", postId);
-  const response = await axios.post(`${BASE_URL}/${postId}/bookmark`,
+  const response = await axios.post(
+    `${BASE_URL}/${postId}/bookmark`,
     {},
     {
       withCredentials: true,
     }
-);
+  );
   return response.data;
 };
 
 export const unbookmarkPostAPI = async (postId) => {
-  const response = await axios.post(`${BASE_URL}/${postId}/unbookmark`,{},
+  const response = await axios.post(
+    `${BASE_URL}/${postId}/unbookmark`,
+    {},
     {
       withCredentials: true,
     }
@@ -149,83 +148,93 @@ export const unbookmarkPostAPI = async (postId) => {
 };
 
 export const fetchBookmarkedPostsAPI = async () => {
-  const response = await axios.get(`${BASE_URL}/bookmarked`,
-    {
-      withCredentials: true,
-    }
-  );
-  
+  const response = await axios.get(`${BASE_URL}/bookmarked`, {
+    withCredentials: true,
+  });
+
   return response.data;
 };
 
-
-
-
-  export const getallpostsdata = async () => {
-    try {
-      const response = await axios.get(
-        `${BackendServername}/posts/getallpublishedposts`
-      );
-      return response.data.posts; 
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
-  };
-
-
-  export const getArticles = async() =>{
-    try {
-      const response = await axios.get(`${BackendServername}/posts/articles/count`,{
-        withCredentials:true
-      })
-
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+export const getallpostsdata = async () => {
+  try {
+    const response = await axios.get(
+      `${BackendServername}/posts/getallpublishedposts`
+    );
+    return response.data.posts;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
+};
 
-  export const getWebinars = async() =>{
-    try {
-      const response = await axios.get(`${BackendServername}/posts/webinars/count`,{
-        withCredentials:true
-      })
+export const getArticles = async () => {
+  try {
+    const response = await axios.get(
+      `${BackendServername}/posts/articles/count`,
+      {
+        withCredentials: true,
+      }
+    );
 
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
+};
 
-  export const getStepbyStepGuides = async() =>{
-    try {
-      const response = await axios.get(`${BackendServername}/posts/guides/count`,{
-        withCredentials:true
-      })
+export const getWebinars = async () => {
+  try {
+    const response = await axios.get(
+      `${BackendServername}/posts/webinars/count`,
+      {
+        withCredentials: true,
+      }
+    );
 
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
+};
 
-  export const approveAll = async() =>{
-    try {
-      await axios.put(`${BackendServername}/posts/approveall`,{},{
-        withCredentials: true
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  export const rejectAll = async() =>{
-    try {
-      await axios.put(`${BackendServername}/posts/rejectall`,{},{
-        withCredentials:true
-      })
+export const getStepbyStepGuides = async () => {
+  try {
+    const response = await axios.get(
+      `${BackendServername}/posts/guides/count`,
+      {
+        withCredentials: true,
+      }
+    );
 
-    } catch (error) {
-      console.error(error)
-    }
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
+};
+
+export const approveAll = async () => {
+  try {
+    await axios.put(
+      `${BackendServername}/posts/approveall`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const rejectAll = async () => {
+  try {
+    await axios.put(
+      `${BackendServername}/posts/rejectall`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};

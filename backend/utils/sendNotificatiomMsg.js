@@ -24,7 +24,7 @@ async function sendEmail(to, postId, retryCount = 0) {
       secure: false,
       auth: {
         user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS, 
+        pass: process.env.GMAIL_PASS,
       },
     });
 
@@ -32,7 +32,7 @@ async function sendEmail(to, postId, retryCount = 0) {
       to,
       subject: "New Post Created",
       html: ` <p>A new post has been created on our site Niche Flare</p>
-        <p>Click <a href="http://localhost:5173/posts/${postId}">here</a> to view the post.</p>
+        <p>Click <a href="https://skillupbuildup.netlify.app/posts/${postId}">here</a> to view the post.</p>
       `,
     };
 
@@ -44,7 +44,9 @@ async function sendEmail(to, postId, retryCount = 0) {
 
     if (error.responseCode === 421 && retryCount < 3) {
       console.log(`Retrying email send (attempt ${retryCount + 1})...`);
-      await new Promise((resolve) => setTimeout(resolve, 5000 * (retryCount + 1)));
+      await new Promise((resolve) =>
+        setTimeout(resolve, 5000 * (retryCount + 1))
+      );
       return sendEmail(to, postId, retryCount + 1);
     } else {
       console.error("Email sending permanently failed:", error);

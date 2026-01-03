@@ -18,7 +18,7 @@ const sendWebinarNotification = async (to, postId, title) => {
       html: `
         <h2>${title}</h2>
         <p>Join our upcoming webinar! Click the link below to learn more:</p>
-        <p><a href="http://localhost:5173/posts/webinar/${postId}" target="_blank">View Webinar</a></p>
+        <p><a href="https://skillupbuildup.netlify.app/posts/webinar/${postId}" target="_blank">View Webinar</a></p>
       `,
     };
 
