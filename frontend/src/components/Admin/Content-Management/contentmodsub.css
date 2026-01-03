@@ -1,0 +1,30 @@
+.cm-data {
+  background: linear-gradient(
+    to left,
+    rgb(0, 125, 214) 50%,
+    transparent 50%
+  ) !important;
+  background-size: 200% 70% !important;
+  transition: background-position 0.4s ease-in-out, 
+              transform 0.3s ease-in-out, 
+              box-shadow 0.3s ease-in-out !important;
+  box-shadow: rgba(165, 165, 165, 0.16) 0px 10px 36px 0px,
+              rgba(0, 0, 0, 0.06) 0px 0px 0px 1px !important;
+  height: 140px !important;
+  padding: 25px 100px !important;
+  will-change: transform, background-position;
+  margin-top: 20px;
+}
+
+.cm-data:hover {
+  background-position: -100% 0 !important;
+  transform: scale(1.1);
+  color: white !important;
+  box-shadow: rgba(0, 125, 214, 0.3) 0px 15px 40px 5px;
+}
+
+
+.contentSubbutton:hover{
+   background:linear-gradient(to right,#2A4CA1, #5A9BFF)!important;
+   
+}

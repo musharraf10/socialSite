@@ -1,0 +1,178 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8f9fa;
+  /* background: linear-gradient(to right, #1E3A8A, #3B82F6)!important; */
+  padding: 20px;
+}
+
+/* Form Wrapper */
+.register-wrapper {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: all 0.3s ease-in-out, transform 0.3s ease-in-out;
+  
+}
+
+/* Scale Effect on Hover */
+.register-wrapper:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Heading */
+.register-wrapper h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e40af;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Arial',sans-serif;
+}
+
+/* Labels - Moved to the Left and Increased Font Size */
+.register-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+}
+
+/* Form Inputs */
+.register-input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #f1f1f1;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+  background-color: #fafafa;
+  margin-bottom: 16px;
+}
+
+/* Input Hover and Focus Effect */
+ .register-input:hover {
+  border-color: #3B82F6;
+}
+
+.register-input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  background: white;
+} 
+
+/* Error Messages */
+.error-message {
+  color: red;
+  font-size: 14px;
+  
+}
+
+/* Sign Up Button - Orange Background with White Font */
+.register-btn {
+  width: 100%;
+  padding: 14px;
+  /* background-color: orangered !important; */
+  background:linear-gradient(to right, #1E3A8A, #3B82F6)!important;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-style: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  /* box-shadow: 0 5px 12px rgba(255, 102, 0, 0.4); */
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Button Hover Pulse Animation */
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* Google Sign-in Button */
+ .google-signin-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 25px;
+  border: 2px solid #ddd;
+  background: linear-gradient(to right, #1E3A8A, #3B82F6)!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: whitesmoke;
+  margin-top: 12px;
+}
+
+/* Google Sign-in Hover Effect - Background and Icon Animation */
+.google-signin-btn:hover {
+  background-color: #0d6efd;
+  border: 1px solid white;
+  box-shadow: 0 6px 15px #42a5f5;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Register Link */
+.register-link {
+  color: #42a5f5;
+  font-weight: bold;
+  font-size: large;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+/* Register Link Hover Effect */
+.register-link:hover {
+  color: #2563EB;
+  transform: translateY(-3px);
+  }
+
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-wrapper {
+    padding: 30px;
+  }
+}
+
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  cursor: pointer;
+  color: #888;
+} 
+
+ 

@@ -1,0 +1,172 @@
+.stats-carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  padding: 0 20px;
+  /* Add padding for better spacing */
+}
+
+.stats-carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow: hidden;
+  width: calc(100% - 80px);
+  /* Adjust width to account for buttons */
+  position: relative;
+  transition: transform 0.5s ease;
+}
+
+.stats-carousel:hover {
+  cursor: grab;
+  /* Indicate draggable behavior */
+}
+
+.stats-carousel:active {
+  cursor: grabbing;
+  /* Indicate dragging behavior */
+}
+
+.stats-carousel .cardsdata {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  border-radius: 12px;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+  background: linear-gradient(135deg, #143D60, #27667B);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateX(0);
+  color: white;
+  /* Ensure text is readable on gradient */
+  padding: 1.5rem;
+  /* Add padding for better spacing */
+}
+
+/* Improved gradient color variations for different cards */
+.stats-carousel .cardsdata:nth-child(2n) {
+  background: linear-gradient(135deg, #620808, #C08B5C);
+}
+
+.stats-carousel .cardsdata:nth-child(3n) {
+  background: linear-gradient(135deg, #062C80, #BCA3CA);
+}
+
+/* .stats-carousel .cardsdata:nth-child(4n) {
+  background: linear-gradient(135deg, #05004E, #0F3D3E);
+}
+
+.stats-carousel .cardsdata:nth-child(5n) {
+  background: linear-gradient(135deg, #41C9E2, #008DDA);
+} */
+
+/* Hover effects for cards */
+.stats-carousel .cardsdata:hover {
+  transform: scale(1.05);
+  /* Slightly scale up on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Bring hovered card to the front */
+}
+
+/* Smooth transition for neighboring cards on hover */
+.stats-carousel:hover .cardsdata:not(:hover) {
+  transform: translateX(5px);
+}
+
+/* Button styling */
+.carousel-btn {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  z-index: 20;
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Semi-transparent white */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Subtle border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+  /* Solid white on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  /* Slightly scale up on hover */
+}
+
+.carousel-btn:disabled {
+  opacity: 0.5;
+  /* Dim disabled buttons */
+  cursor: not-allowed;
+}
+
+/* Chart container styling */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  /* Add padding for better spacing */
+}
+
+/* Media queries for different screen sizes */
+@media (max-width: 768px) {
+  .stats-carousel .cardsdata {
+    width: 100%;
+    min-width: 250px;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  .stats-carousel-container {
+    padding: 0 10px;
+    /* Reduce padding on smaller screens */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  .stats-carousel .cardsdata {
+    width: calc(50% - 0.5rem);
+    min-width: 200px;
+  }
+}
+
+@media (min-width: 992px) {
+  .stats-carousel .cardsdata {
+    width: calc(33.333% - 0.67rem);
+    min-width: 200px;
+  }
+}
+
+/* Additional global styles for better readability */
+body {
+  font-family: 'Inter', sans-serif;
+  /* Use a modern font */
+  background-color: #f8f9fa;
+  /* Light background for the page */
+}
+
+h2 {
+  font-weight: 600;
+  /* Bold heading */
+  color: #2d3748;
+  /* Dark gray for better contrast */
+}
+
+.text-primary {
+  color: #6366f1 !important;
+  /* Consistent primary color */
+}
